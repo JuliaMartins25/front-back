@@ -29,6 +29,41 @@ class AvaliacaoController {
             res.status(500).json({ erro: "Erro ao criar avaliação" });
         }
     };
+
+    delete = async (req, res) => {
+      const { id } = req.params;
+  
+      try {
+        const sucesso = await avaliacaoModel.delete(Number(id));
+  
+        if (!sucesso) {
+          return res.status(404).json({ erro: "Avaliação não encontrada" });
+        }
+  
+        res.status(200).send({ message: "Avaliação deletada com sucesso!" });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro ao excluir avaliação!" });
+      }
+    };
+
+    getById = async (req, res) => {
+      const { id } = req.params;
+
+      try {
+          const avaliacao = await avaliacaoModel.getById(parseInt(id));
+
+          if (!avaliacao) {
+              return res.status(404).json({ erro: "Avaliação não encontrada" });
+          }
+
+          res.json(avaliacao);
+      } catch (error) {
+          console.error(error);
+          res.status(500).json({ erro: "Erro ao buscar a avaliação" });
+      }
+  };
+
 }
 
 export default new AvaliacaoController();
