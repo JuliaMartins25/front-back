@@ -41,16 +41,25 @@ model Profile {
 }
 
 model Gallery {
-  id String @id @default(cuid())
-  pictures String?
-  profileId Int 
+  id        String  @id @default(cuid())
+  pictures  String?
+  profileId Int
 
-  profile Profile @relation(fields: [profileId], references: [id],  onDelete: Cascade, onUpdate: Cascade)
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-
   @@map("gallerys")
+}
 
+model Card {
+  id    String @id @default(cuid())
+  title String
+  image String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("cards")
 }
