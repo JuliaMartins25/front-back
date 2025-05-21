@@ -13,23 +13,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Task {
-  id        Int     @id @default(autoincrement())
-  descricao String
-  concluida Boolean @default(false)
-
-  criadaEm DateTime @default(now())
-
-  @@map("tasks")
-}
-
 model Avaliation {
-  id Int @id @default(autoincrement())
-  nome String
+  id         Int     @id @default(autoincrement())
+  nome       String
   comentario String
-  perfil String?
+  perfil     String?
 
   criadaEm DateTime @default(now())
 
   @@map("avaliations")
+}
+
+model Profile {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  password  String
+  biography String?
+  avatar    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  gallerys Gallery[]
+
+  @@map("profiles")
+}
+
+model Gallery {
+  id String @id @default(cuid())
+  pictures String?
+  profileId Int 
+
+  profile Profile @relation(fields: [profileId], references: [id],  onDelete: Cascade, onUpdate: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+
+  @@map("gallerys")
+
 }

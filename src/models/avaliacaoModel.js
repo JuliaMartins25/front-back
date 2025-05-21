@@ -1,4 +1,4 @@
-import prisma from "../../prisma/client.js";
+import prisma from "../../prisma/prisma.js";
 
 class AvaliacaoModel {
     //Mostrar todas as avaliações

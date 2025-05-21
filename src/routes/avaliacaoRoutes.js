@@ -1,11 +1,11 @@
 import express from "express";
 import avaliacaoController from "../controllers/avaliacaoController.js";
 
-const router = express.Router();
+const avaliacaoRouter = express.Router();
 
-router.get("/", avaliacaoController.getAll);
-router.get("/:id", avaliacaoController.getById);
-router.post("/", avaliacaoController.create);
-router.delete("/:id", avaliacaoController.delete);
+avaliacaoRouter.get("/", avaliacaoController.getAll);
+avaliacaoRouter.get("/:id", avaliacaoController.getById);
+avaliacaoRouter.post("/", avaliacaoController.create);
+avaliacaoRouter.delete("/:id", avaliacaoController.delete);
 
-export default router;
+export default avaliacaoRouter;
